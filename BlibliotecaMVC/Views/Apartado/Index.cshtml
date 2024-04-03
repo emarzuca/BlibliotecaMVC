@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Apartado>
+
+@{ViewData["Title"]="Apartado";
+}
+
+<h1>Apartado</h1>
+<h5>Concepto de los apartados ok</h5>
+
+@* Creamo el boton para ejecutar la accion de crear *@
+
+<a asp-action="Crear" class="btn btn-primary">Nuevo Apartado</a>
+
+
+@*Creación de la Nueva tabla*@
+
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Acciones</th>
+                <th>Clave ID</th>
+                <th>Nombre Apartado</th>
+                <th>Area que lo generó</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var apartado in Model)
+            {
+                <tr>
+                    <td>
+                        <a class="btn btn-primary" asp-route-Id="@apartado.ApartadoId" onclick="cargarVistaParcial(@apartado.ApartadoId)">Ver detalle</a>
+                        <a class="btn btn-primary" asp-action="Actualizar" asp-route-Id="@apartado.ApartadoId">Editar</a>
+                        <a class="btn btn-danger" asp-action="Borrar" asp-route-Id="@apartado.ApartadoId">Borrar</a>
+                    </td>
+                    <td>
+                        @apartado.ApartadoId.ToString()
+                    </td>
+
+                    <td>
+                        @apartado.apartado
+                    </td>
+
+                    <td>@apartado.Area</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div id="partialContainer" data-url="@Url.Action("DetalleConceptos", "Apartado")">
+        <h1>Vista de la Tabla detalle</h1>
+    </div>
+
+</body>
+
+
+    @* // Renderizar la vista parcial para los subapartados *@
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <link href="~/css/gridview.css" rel="stylesheet" />
+
+<script>
+        function cargarVistaParcial(id) {
+            var url = $('#partialContainer').data('url');
+            //var id = 13 // $('#partialViewContainer').data('id'); // Obtener el valor de data-id
+            alert("MIs huevos" + id);
+            
+            try {
+                $.ajax({
+                    //url: '@Url.Action("DetalleConceptos", "Apartado")',
+                    //url: '/Apartado/DetalleConceptos?id=' + id,
+
+                    url: url,
+                    type: 'GET',
+                    data: { id: id }, // Parámetro que se envia al método controlador
+                    success: function (result) {
+                        $('#partialContainer').html(result);
+                        alert("exito" + result);
+                        console.log(result);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            } catch { (error)
+                alert('Se produjo un error:', error);
+            }
+        }
+</script>
+}

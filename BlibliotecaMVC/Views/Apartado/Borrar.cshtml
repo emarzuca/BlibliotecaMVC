@@ -1,0 +1,16 @@
+﻿@model Apartado
+
+@{
+    ViewData["Title"] = "Borrar Apartado";
+}
+
+
+<h3 class="mb-3">¿Desea Borrar el Apartado @Model.ApartadoId</h3>
+
+
+<form asp-action="BorrarApartado">
+    <input type="hidden" asp-for="ApartadoId" />
+    <button class="btn btn-danger" type="submit">Borrar</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>
+

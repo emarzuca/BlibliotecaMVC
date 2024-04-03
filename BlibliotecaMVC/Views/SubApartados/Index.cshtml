@@ -1,0 +1,61 @@
+﻿@* @model IEnumerable<ViewModelSubAparadosEstilos> *@
+@{
+    ViewData["Title"] = "Listado de SubApartados";    
+}
+
+<div class="mb-3">
+    <input type="text" id="filtroT" />
+
+    <div class="form-inline" style="display:flex; flex-direction: row; align-items:center;">
+        <label>Seleccione el apartado</label>
+        <select id="ListadeApartados" class="form-select">
+
+            @*                         @if (ViewBag.Opciones is not null) {
+            @foreach (var opcion in ViewBag.Opciones)
+            {
+            <option value="@opcion.ApartadoID">@opcion.Apartado</option>
+            }
+            } *@
+
+            @foreach (var opcion in ViewBag.Opciones)
+            {
+                <option value="@opcion.ApartadoID">@opcion.Apartado</option>
+            }
+        </select>
+    </div>
+
+</div>
+<partial name="_NuevaListaFiltroApartado"/>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+          
+            $('#ListadeApartados').change(function () {
+                console.log("Cambio valor");
+                var apartadoId = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("NuevaListaFiltroApartado", "SubApartados")', // Accion - Controlador
+                    type: 'GET',
+                    data: { filtro: apartadoId },
+                    success: function (data) {
+                        // $('#form').empty();
+                        $('#form').html(data);
+                        console.log(data);
+                        //window.location.href = '@Url.Action("Index","SubApartados")'
+                    }                                            
+                });
+                var Texto = document.getElementById("filtroT");
+
+                document.getElementById("filtroT").innerHTML = apartadoId;
+                Texto.value = apartadoId;
+                console.log(apartadoId);
+            });
+        });
+    </script>
+}

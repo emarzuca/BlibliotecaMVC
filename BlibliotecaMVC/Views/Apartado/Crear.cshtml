@@ -1,0 +1,42 @@
+﻿@model ApartadosVierModel
+
+@{
+    ViewData["Title"] = "Crear Apartado";
+}
+
+<h1>Alta de Apartados</h1>
+<h5>Describe los apartados</h5>
+
+
+<form asp-action="Crear">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="apartado" class="form-label"></label>
+        <input asp-for="apartado" class="form-control" />
+        <span asp-validation-for="apartado" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="identificacionDirectorio" class="form-label"></label>
+        <input asp-for="identificacionDirectorio" class="form-control" />
+        <span asp-validation-for="identificacionDirectorio" class="text-danger"></span>
+    </div>
+
+
+    <div class="mb-3">
+        <label asp-for="Areas" class="form-label"></label>
+        <select asp-for="AreaId" asp-items="Model.Areas" class="form-select"></select>
+        <span asp-validation-for="Areas" class="text-danger"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Crear</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+
+</form>
+
+@section Scripts {
+    <partial name="_validationScriptsPartial" />
+}

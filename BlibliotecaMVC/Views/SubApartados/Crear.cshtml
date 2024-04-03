@@ -1,0 +1,76 @@
+﻿@model ViewModelListadoApartado
+
+@{
+    ViewData["Title"] = "Crear SubApartado";
+}
+
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Crear" id="form">
+
+    <input type="hidden" asp-for="ConceptoID" />
+
+    <div class="mb-3">
+        <label asp-for="Apartado" class="form-label"></label>
+        <select asp-for="ApartadoId" asp-items="Model.ApartadosLista" class="form-select"></select>
+        <span asp-validation-for="ApartadoId"></span>
+    </div>
+
+
+    <div class="mb-3">
+        <label asp-for="Concepto" class="form-label"></label>
+        <input asp-for="Concepto" class="form-control" />
+        <span asp-validation-for="Concepto"></span>
+    </div>
+
+
+
+    <div class="card">
+        <div class="card-header" style="background-color:cadetblue">
+            <div>
+                Seleccione una Opción de acuerdo al tipo de Documento en el Concepto
+            </div>
+        </div>
+        <div class="form-inline" style="display:flex; flex-direction: row; align-items:center;">
+            <div class="mb-3 me-auto">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="swUnifamiliar" asp-for="Normal" name="Normal">
+                    <label class="form-check-label" for="mySwitch" asp-for="Normal">Normal</label>
+                </div>
+            </div>
+
+            <div class="mb-3 me-auto">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="swUnifamiliar" asp-for="Unifamiliar" name="Unifamiliar">
+                    <label class="form-check-label" for="mySwitch" asp-for="Unifamiliar">Unifamiliar</label>
+                </div>
+            </div>
+
+            <div class="mb-3 me-auto">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="swReden" asp-for="Redensificacion" name="Redensificacion">
+                    <label class="form-check-label" for="mySwitchr" asp-for="Redensificacion">Redensificacion</label>
+                </div>
+            </div>
+
+            <div class="mb-3 me-auto">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="swcred" asp-for="ConCredito" name="ConCredito">
+                    <label class="form-check-label" for="mySwitchr" asp-for="ConCredito">Con Credito</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card-footer">
+            <strong style="color:red">Ejemplo:</strong> <p>Acta de nacimiento, seleccione los diferentes check a los que les aplica el documento</p>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+
+
+    </div>
+</form>

@@ -1,0 +1,37 @@
+﻿@model RegistroViewModel
+
+@{
+    ViewData["Title"] = "Registro de usuarios";
+}
+
+
+<h1>Registro de usuarios</h1>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Registro">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <labal asp-for="Email" class="form-label"></labal>
+                <input asp-form="Email" class="form-control"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <labal asp-for="Password" class="form-label"></labal>
+                <input asp-form="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button class="btn btn-primary">Registrate</button>
+            <a class="btn btn-success" asp-action="login">DEseo loguearme</a>
+        </form>
+    </div>
+</div>
+
+
+@* VAlidacion desde el fronto End contiene la validacion exclusiva de Jquery *@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
