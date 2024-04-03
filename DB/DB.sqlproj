@@ -88,5 +88,6 @@
     <Build Include="dbo\Stored Procedures\SP_InsertarConcepto.sql" />
     <Build Include="dbo\Stored Procedures\SP_DASHBOARD.sql" />
     <Build Include="dbo\Stored Procedures\SP_DespliegaAreas.sql" />
+    <Build Include="dbo\Stored Procedures\SP_PRUEBA.sql" />
   </ItemGroup>
 </Project>
