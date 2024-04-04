@@ -75,10 +75,8 @@ namespace BlibliotecaMVC.Controllers
             var modelo = await repositorioApartados.ListadeApartados2();
             ViewBag.Opciones = modelo.ToList();
             return PartialView("_NuevaListaFiltroApartado", DetalleModeloConceptos);
-
             //return View("Index", nuevoModelo);           
          }
-
 
 
         public async Task<IEnumerable<SelectListItem>> DespliegaAreas()
