@@ -159,6 +159,7 @@ namespace BlibliotecaMVC.Controllers
             return listaArea.Select(x => new SelectListItem(x.Area, x.AreaId.ToString()));
         }
 
+
         [HttpGet]
         public async Task<IActionResult> DetalleConceptos(int Id) {
 

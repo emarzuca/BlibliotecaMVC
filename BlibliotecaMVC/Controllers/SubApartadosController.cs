@@ -75,7 +75,7 @@ namespace BlibliotecaMVC.Controllers
             var modelo = await repositorioApartados.ListadeApartados2();
             ViewBag.Opciones = modelo.ToList();
             return PartialView("_NuevaListaFiltroApartado", DetalleModeloConceptos);
-            //return View("Index", nuevoModelo);           
+            //return View("Index", nuevoModelo);
          }
 
 
@@ -116,7 +116,86 @@ namespace BlibliotecaMVC.Controllers
         }
 
         //private async Task<IEnumerable<SelectListItem>> ObtenerConContoID
-        
+
+
+        [HttpGet]
+
+        public async Task<IActionResult> Editar(int id)
+        {
+            
+            //obtenemos los elementos de la consulta con el Modelo y su herencia
+            var obtenerIdSubapartado = await repositorioSubApartados.ObtenerConceptoId(id);
+
+            if (obtenerIdSubapartado is null)
+            {
+                return RedirectToAction("NoEncontrado", "Home");
+            }
+
+
+            //Mapeamos los resultados de la consulta anterior con el modelo que trae la coleccion de listado
+            // de los apartadod con el modelo anterior de la consulta
+
+            var modelo = new ViewModelListadoApartado()
+            {
+                ApartadoId = obtenerIdSubapartado.ApartadoId,
+                ConceptoID = obtenerIdSubapartado.ConceptoID,
+                Concepto = obtenerIdSubapartado.Concepto,
+                Normal = obtenerIdSubapartado.Normal,
+                ConCredito = obtenerIdSubapartado.ConCredito,
+                Unifamiliar = obtenerIdSubapartado.Unifamiliar,
+                Redensificacion = obtenerIdSubapartado.Redensificacion
+            };
+
+            // una vez mapeados los elementos entro las colecciones, traemos la consulta de los apartados
+            // y en este método generamos la selección solo del apartado seleccionado
+            modelo.ApartadosLista = await ObtenerListaApartados();
+
+            return View(modelo);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Editar(ViewModelListadoApartado modelo)
+        {
+
+            if (!ModelState.IsValid)
+            {
+
+                return View(modelo);
+            }
+
+            await repositorioSubApartados.Guardar(modelo);
+            return RedirectToAction("Index");
+        }
+
+
+
+        public async Task<IActionResult> Borrar(int id)
+        {
+            var Subapartado = await repositorioSubApartados.ObtenerConceptoId(id);
+
+            if (Subapartado is null)
+            {
+                return RedirectToAction("NoEncontrado", "Home");
+            }
+            //llamamos a la Vista y pasamos el modelo extraido
+            return View(Subapartado);
+        }
+
+
+        [HttpPost]
+        // invoca desde la vista form asp-action="BorrarSubApartado"
+        public async Task<IActionResult> BorrarSubApartado(int ConceptoID)
+        {
+            var Subapartado = await repositorioApartados.ObtenerPorID(ConceptoID);
+
+            if (Subapartado is null)
+            {
+                return RedirectToAction("NoEncontrado", "Home");
+            }
+            await repositorioSubApartados.Borrar(ConceptoID);
+            return RedirectToAction("Index");
+        }
 
 
 

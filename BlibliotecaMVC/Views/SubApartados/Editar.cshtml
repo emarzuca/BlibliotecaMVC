@@ -1,21 +1,21 @@
 ﻿@model ViewModelListadoApartado
 
 @{
-    ViewData["Title"] = "Crear SubApartado";
+    ViewData["Title"] = "Modificar";
 }
 
 
 <div asp-validation-summary="All" class="text-danger"></div>
 
-<form asp-action="Crear" id="form">
+<form asp-action="Editar" id="form">
 
     <input type="hidden" asp-for="ConceptoID" />
 
-    <div class="mb-3">
+<div class="mb-3">
         <label asp-for="Apartado" class="form-label"></label>
         <select asp-for="ApartadoId" asp-items="Model.ApartadosLista" class="form-select"></select>
         <span asp-validation-for="ApartadoId"></span>
-    </div>
+    </div> 
 
 
     <div class="mb-3">

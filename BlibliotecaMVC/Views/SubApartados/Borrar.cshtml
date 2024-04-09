@@ -1,0 +1,16 @@
+﻿@model SubApartados
+
+@{
+    ViewData["Title"] = "Borrar SubApartados";
+}
+
+
+<h3 class="mb-3">¿Desea Borrar el Sub Apartado @Model.Concepto:  @Model.ConceptoID </h3>
+
+
+<form asp-action="BorrarSubApartado">
+    <input type="hidden" asp-for="ConceptoID" />
+    <button class="btn btn-danger" type="submit">Borrar</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+</form>
+

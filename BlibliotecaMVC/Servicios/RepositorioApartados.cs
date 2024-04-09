@@ -22,7 +22,7 @@ namespace BlibliotecaMVC.Servicios
 
     public class RepositorioApartados : IRepositorioApartados
     {
-        // Creamos un método provado para conecciones de datos
+        // Creamos un método privado para conecciones de datos
         private readonly string connectionString;
 
 
@@ -114,8 +114,5 @@ namespace BlibliotecaMVC.Servicios
                   areaId = @AreaId
                   WHERE ApartadoId = @ApartadoId", apartado);
         }
-
-
-
     }
 }
