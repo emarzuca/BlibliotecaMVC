@@ -89,5 +89,7 @@
     <Build Include="dbo\Stored Procedures\SP_DASHBOARD.sql" />
     <Build Include="dbo\Stored Procedures\SP_DespliegaAreas.sql" />
     <Build Include="dbo\Stored Procedures\SP_PRUEBA.sql" />
+    <Build Include="dbo\Stored Procedures\SP_eliminaSubApartados.sql" />
+    <Build Include="dbo\Stored Procedures\SP_actualizaSubApartados.sql" />
   </ItemGroup>
 </Project>

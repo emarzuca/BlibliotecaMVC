@@ -4,9 +4,9 @@
 -- Description:	<Description,,>
 -- =============================================
 CREATE PROCEDURE [dbo].[SP_ObtenerIdConcepto]
-	@ConceptoId int
+	@Id int
 AS
 BEGIN
 
-Select ConceptoID from Cat_ConceptoLB where ConceptoID = @ConceptoId
+Select apartadoId, ConceptoID, Concepto, normal,Concredito,Unifamiliar, Redensificacion from Cat_ConceptoLB where ConceptoID =@Id
 END
