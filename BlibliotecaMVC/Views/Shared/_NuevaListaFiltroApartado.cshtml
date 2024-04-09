@@ -35,7 +35,7 @@
                     {
                         <tr>
                             <td>
-                                <a class="btn btn-primary" asp-action="Editar" asp-route-Id="@ViewModelSubAparadosEstilos.ConceptoID">Editar</a>
+                                <a class="btn btn-primary"  asp-action="Editar" asp-route-Id="@ViewModelSubAparadosEstilos.ConceptoID">Editar</a>
                                 <a class="btn btn-danger" asp-action="Borrar" asp-route-Id="@ViewModelSubAparadosEstilos.ConceptoID">Borrar</a>
                             </td>
 
@@ -45,8 +45,8 @@
                             <td>@ViewModelSubAparadosEstilos.Concepto</td>
                             @*   <td class="@ViewModelSubAparadosEstilos.EstiloUnifamiliar form-control">@ViewModelSubAparadosEstilos.RUnifamiliar</td> *@
 
-                            <td><a class="@ViewModelSubAparadosEstilos.EstiloNormal form-control" asp-action="Index">@ViewModelSubAparadosEstilos.RUnifamiliar</a></td>
-                            <td><a class="@ViewModelSubAparadosEstilos.EstiloUnifamiliar form-control" asp-action="Index">@ViewModelSubAparadosEstilos.RNormal</a></td>
+                            <td><a class="@ViewModelSubAparadosEstilos.EstiloNormal form-control" asp-action="Index">@ViewModelSubAparadosEstilos.RNormal</a></td>
+                            <td><a class="@ViewModelSubAparadosEstilos.EstiloUnifamiliar form-control" asp-action="Index">@ViewModelSubAparadosEstilos.RUnifamiliar</a></td>
                             <td><a class="@ViewModelSubAparadosEstilos.EstiloRedensificacion form-control" asp-action="Index">@ViewModelSubAparadosEstilos.RRedensificacion</a></td>
                             <td><a class="@ViewModelSubAparadosEstilos.EstiloConcredito form-control" asp-action="Index">@ViewModelSubAparadosEstilos.RConcredito</a></td>
                         </tr>

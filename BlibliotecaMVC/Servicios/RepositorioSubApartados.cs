@@ -14,7 +14,10 @@ namespace BlibliotecaMVC.Servicios
 
     public interface IRepositorioSubApartados
     {
+        Task Borrar(int Id);
         Task Crear(ViewModelListadoApartado modelo);
+        Task Guardar(ViewModelListadoApartado SubConceptos);
+        Task<VMDetalleSubApartado> ObtenerConceptoId(int Id);
         Task<IEnumerable<VMDetalleSubApartado>> ObtenerDetalleSubApartados(int filtro);
         Task<IEnumerable<ViewModelSubAparadosEstilos>> ObtenerListaSubApartados(int filtro);  
     }
@@ -43,13 +46,13 @@ namespace BlibliotecaMVC.Servicios
             , new { filtro }, commandType: CommandType.StoredProcedure);
         }
 
-        //public async Task<IEnumerable<ViewModelListadoApartado>> ObtenerConceptoId(int ConceptoId)
-        //{
-        //    using var connection = new SqlConnection (connectionString);
+        public async Task<VMDetalleSubApartado> ObtenerConceptoId(int Id)
+        {
+            using var connection = new SqlConnection(connectionString);
 
-        //    return await connection.QueryAsync<ViewModelListadoApartado>("SP_ObtenerIdConcepto"
-        //    , new { ConceptoId }, commandType: CommandType.StoredProcedure);
-        //}
+            return await connection.QueryFirstOrDefaultAsync<VMDetalleSubApartado>("SP_ObtenerIdConcepto"
+            , new { Id }, commandType: CommandType.StoredProcedure);
+        }
 
         public async Task Crear(ViewModelListadoApartado modelo)
         {
@@ -62,5 +65,28 @@ namespace BlibliotecaMVC.Servicios
                 SELECT SCOPE_IDENTITY();", modelo);
             modelo.ConceptoID = id;
         }
+
+
+        public async Task Guardar(ViewModelListadoApartado SubConceptos)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync("SP_actualizaSubApartados",
+                new { SubConceptos.ApartadoId, SubConceptos.ConceptoID,
+                    SubConceptos.Concepto,
+                    SubConceptos.Normal,
+                    SubConceptos.ConCredito,
+                    SubConceptos.Unifamiliar,
+                    SubConceptos.Redensificacion}, commandType: CommandType.StoredProcedure);
+        }
+
+
+        public async Task Borrar(int Id)
+        {
+            using var connection = new SqlConnection(connectionString);
+
+            await connection.ExecuteAsync("SP_eliminaSubApartados", new { Id }, commandType: CommandType.StoredProcedure);
+
+        }
+
     }
 }
