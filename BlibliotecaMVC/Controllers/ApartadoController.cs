@@ -9,7 +9,7 @@ using System.Data;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-
+using Microsoft.IdentityModel.Abstractions;
 
 namespace BlibliotecaMVC.Controllers
 {
@@ -82,6 +82,8 @@ namespace BlibliotecaMVC.Controllers
         }
 
 
+
+        //llama a la vista de borrar apartados
         public async Task<IActionResult> Borrar(int id)
         {
             var apartado = await repositorioApartados.ObtenerPorID(id);
@@ -95,6 +97,9 @@ namespace BlibliotecaMVC.Controllers
         }
 
 
+
+
+        //ejecuta la accion desde la vista trayendo el id desde asp-for
         [HttpPost]
 
         public async Task<IActionResult> BorrarApartado(int ApartadoId)
@@ -160,7 +165,7 @@ namespace BlibliotecaMVC.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> DetalleConceptos(int Id) {
 
             using var connection = new SqlConnection(connectionString);
@@ -172,8 +177,10 @@ namespace BlibliotecaMVC.Controllers
 
             try
             {
+                //var DetalleSubapartadosParcial = await repositorioSubApartados.ObtenerDetalleSubApartados(Id);
                 IEnumerable<VMDetalleSubApartado> DetalleSubapartadosParcial = await repositorioSubApartados.ObtenerDetalleSubApartados(Id);
                 return PartialView("_VisualizaConceptoParcial", DetalleSubapartadosParcial);
+
             }
             catch (Exception ex)
             {

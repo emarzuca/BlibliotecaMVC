@@ -1,12 +1,14 @@
 ﻿@model IEnumerable<VMDetalleSubApartado>
 
-
 @{ViewData["Title"]="Conceptos";
 }
 
 <h1>Vista PArcial de lo seleccionado</h1>
 
-<table class="table">
+
+@if (Model != null)
+{
+    <table class="table">
     <thead>
         <tr>
             <th>Concepto</th>
@@ -14,15 +16,22 @@
         </tr>
     </thead>
 
-    <tbody>
-          @foreach(var VMSubApartado in Model)
-        {
-        <tr>
-                <td>@VMSubApartado.Concepto</td>
-                <td>@VMSubApartado.ConceptoID</td>
-        </tr>
-        }
+    <tbody>      
+            @foreach (var VMSubApartado in Model)
+            {
+                <tr>
+                    <td>@VMSubApartado.Concepto</td>
+                    <td>@VMSubApartado.ConceptoID</td>
+                </tr>
+            }
         </tbody>
 
     </table>
+
+} else
+{
+    <p>No hay resultados</p>
+}
+
+
 
