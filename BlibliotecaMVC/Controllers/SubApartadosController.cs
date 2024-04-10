@@ -42,7 +42,6 @@ namespace BlibliotecaMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int filtro)
         {
-
             //IEnumerable<ViewModelCatApartados> listaApartados;
 
             var subApartados = await ObtenerListaSubApartados(filtro);
