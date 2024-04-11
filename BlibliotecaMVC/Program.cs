@@ -1,12 +1,29 @@
 using BlibliotecaMVC;
 using BlibliotecaMVC.Servicios;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+var politicaUsuariosAutenticados = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+
+
+
+
 // Add services to the container.
+
+//establecemos ls politicas de autentificacion arriba mencionadas
+builder.Services.AddControllersWithViews(opciones =>
+{
+    opciones.Filters.Add(new AuthorizeFilter(politicaUsuariosAutenticados));
+});
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IRepositorioApartados, RepositorioApartados>();
 builder.Services.AddTransient<IRepositorioSubApartados, RepositorioSubApartados>();
